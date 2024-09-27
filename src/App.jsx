@@ -4,16 +4,16 @@ import "./App.css"
 function App() {
 
   const [firstNumber, setFirstNumber] = useState(0)
-  const [secondNumber, setSecondNumber] = useState('')
+  const [secondNumber, setSecondNumber] = useState(0)
   const [operation, setOperation] = useState(null)
   const [result, setResult] = useState(null)
 
   const numberclick1 = (num) => {
-    setFirstNumber(num)
+    setFirstNumber((prev) => prev === 0 ? num : prev + num)
   }
 
   const numberclick2 = (num) => {
-    setSecondNumber(num)
+    setSecondNumber((prev) => prev === 0 ? num : prev + num)
   }
 
   
@@ -52,22 +52,26 @@ function App() {
     }
   }
 
+  const clear = () => {
+    setFirstNumber(0);
+    setSecondNumber(0)
+
+  }
+
   return (
     <div className="calculator">
       <div className="panel">
         <p>{firstNumber}</p>
         <div className="numbers">
-          <button onClick={() => numberclick1(1)}>1</button>
-          <button onClick={() => numberclick1(2)}>2</button>
-          <button onClick={() => numberclick1(3)}>3</button>
-          <button onClick={() => numberclick1(4)}>4</button>
-          <button onClick={() => numberclick1(5)}>5</button>
-          <button onClick={() => numberclick1(6)}>6</button>
-          <button onClick={() => numberclick1(7)}>7</button>
-          <button onClick={() => numberclick1(8)}>8</button>
-          <button onClick={() => numberclick1(9)}>9</button>
-          <button onClick={() => numberclick1(0)}>0</button>
-          <button onClick={() => numberclick1(0) }>Clear</button>
+          
+    
+          {['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].map(number => (
+            <button key={number} onClick={() => numberclick1(number)}>{number}</button>
+
+            // key is important in react for identif
+          ))}
+
+          <button onClick={() => clear()}>Clear</button>
         </div>
       </div>
 
@@ -84,17 +88,15 @@ function App() {
       <div className="panel">
         <p>{secondNumber}</p>
         <div className="numbers">
-          <button onClick={() => numberclick2(1)}>1</button>
-          <button onClick={() => numberclick2(2)}>2</button>
-          <button onClick={() => numberclick2(3)}>3</button>
-          <button onClick={() => numberclick2(4)}>4</button>
-          <button onClick={() => numberclick2(5)}>5</button>
-          <button onClick={() => numberclick2(6)}>6</button>
-          <button onClick={() => numberclick2(7)}>7</button>
-          <button onClick={() => numberclick2(8)}>8</button>
-          <button onClick={() => numberclick2(9)}>9</button>
-          <button onClick={() => numberclick2(0)}>0</button>
-          <button onClick={() => numberclick2(0)}>Clear</button>
+          
+
+          {['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].map(number => (
+            <button key={number} onClick={() => numberclick2(number)}>{number}</button>
+          ))}
+
+          
+          <button onClick={() => clear()}>Clear</button>
+
         </div>
       </div>
       <div className="panel answer">
